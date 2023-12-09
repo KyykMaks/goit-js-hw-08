@@ -24,18 +24,23 @@ form.addEventListener(
 
 form.addEventListener('submit', evt => {
   evt.preventDefault();
+  if (emailInput.value.trim() !== '' || messageInput.value.trim() !== ''){
   console.log(data);
   form.reset();
+  localStorage.removeItem(localStorageKey);
+  } else {
+console.log("Заповніть поля");
+  }
 });
 
 function toShow() {
-  const saved = JSON.parse(localStorage.getItem('feedback-form-state'));
+  const saved = JSON.parse(localStorage.getItem(localStorageKey));
 
-  if (saved.email) {
+  if (saved && saved.email) {
     emailInput.value = saved.email;
   }
 
-  if (saved.message) {
+  if (saved && saved.message) {
     messageInput.value = saved.message;
   }
 }
