@@ -1,4 +1,3 @@
-
 const throttle = require('lodash.throttle');
 const form = document.querySelector('.feedback-form');
 const emailInput = form.querySelector('[name="email"]');
@@ -24,13 +23,17 @@ form.addEventListener(
 
 form.addEventListener('submit', evt => {
   evt.preventDefault();
-  if (emailInput.value.trim() !== '' || messageInput.value.trim() !== ''){
+
+  if ([emailInput, messageInput].some(el => !el.value.trim())) {
+    return console.log('Заповніть поля')
+  };
+  // if (emailInput.value.trim() !== '' || messageInput.value.trim() !== ''){
   console.log(data);
   form.reset();
   localStorage.removeItem(localStorageKey);
-  } else {
-console.log("Заповніть поля");
-  }
+  //   } else {
+  // console.log("Заповніть поля");
+  // }
 });
 
 function toShow() {
